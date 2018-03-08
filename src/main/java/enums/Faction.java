@@ -31,7 +31,7 @@ public enum Faction {
 	PICTS(0, 0, 0, 0, new Building[] {}, new Building[] {}, new Building[] {}, new Building[] {}),
 	SASSANID_EMPIRE(0, 0, 0, 0, new Building[] {}, new Building[] {}, new Building[] {}, new Building[] {}),
 	SAXONS(0, 0, 0, 0, new Building[] {}, new Building[] {}, new Building[] {}, new Building[] {}),
-	SCLAVENIANS(0, 0, 0, 0, new Building[] {}, new Building[] {}, new Building[] {}, new Building[] {}),
+	SCLAVENIANS(0, 0, 0, 0, SCLAVENIANS_CAPITAL_CITY, SCLAVENIANS_CITY, SCLAVENIANS_CAPITAL_TOWN, SCLAVENIANS_TOWN),
 	SUEBIANS(0, 0, 0, 0, new Building[] {}, new Building[] {}, new Building[] {}, new Building[] {}),
 	TANUKHIDS(0, 0, 0, 0, new Building[] {}, new Building[] {}, new Building[] {}, new Building[] {}),
 	VANDALS(0, 0, 0, 0, new Building[] {}, new Building[] {}, new Building[] {}, new Building[] {}),

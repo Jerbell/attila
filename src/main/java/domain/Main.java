@@ -37,15 +37,15 @@ public class Main {
 	
 	// Anteans
 	private static Province TRANSCARPATHIA = new Province("Transcarpathia", 5,
-			capitalCity("Arheimer", NO_RESOURCE, LARGE_CITY, SMOKEHOUSE, CARPENTERS_GUILD),
-			town("Leopolis", DYES, FORTIFIED_TOWN, CANALS),
+			capitalCity("Arheimer", NO_RESOURCE, LARGE_CITY, CARPENTERS_GUILD, SMOKEHOUSE),
+			town("Leopolis", DYES, FORTIFIED_TOWN),
 			town("Belz", NO_RESOURCE, FORTIFIED_TOWN)
 		);
 
 	public static void main(String[] args) {
-//		Optimiser o = new Optimiser(VENEDIANS, SLAVIC_PAGANISM, DIFFICULTY, GERMANO_SARMARTIA);
+		Optimiser o = new Optimiser(VENEDIANS, SLAVIC_PAGANISM, DIFFICULTY, GERMANO_SARMARTIA);
 //		Optimiser o = new Optimiser(SCLAVENIANS, SLAVIC_PAGANISM, DIFFICULTY, HYPERBOREA);
-		Optimiser o = new Optimiser(ANTEANS, SLAVIC_PAGANISM, DIFFICULTY, TRANSCARPATHIA);
+//		Optimiser o = new Optimiser(ANTEANS, SLAVIC_PAGANISM, DIFFICULTY, TRANSCARPATHIA);
 	}
 
 }
