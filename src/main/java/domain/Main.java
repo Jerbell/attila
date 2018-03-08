@@ -44,8 +44,8 @@ public class Main {
 
 	public static void main(String[] args) {
 //		Optimiser o = new Optimiser(VENEDIANS, SLAVIC_PAGANISM, DIFFICULTY, GERMANO_SARMARTIA);
-		Optimiser o = new Optimiser(SCLAVENIANS, SLAVIC_PAGANISM, DIFFICULTY, HYPERBOREA);
-//		Optimiser o = new Optimiser(ANTEANS, SLAVIC_PAGANISM, DIFFICULTY, TRANSCARPATHIA);
+//		Optimiser o = new Optimiser(SCLAVENIANS, SLAVIC_PAGANISM, DIFFICULTY, HYPERBOREA);
+		Optimiser o = new Optimiser(ANTEANS, SLAVIC_PAGANISM, DIFFICULTY, TRANSCARPATHIA);
 	}
 
 }
