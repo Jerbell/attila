@@ -1,24 +1,27 @@
 package domain;
 
+import static com.google.common.collect.ObjectArrays.concat;
+import static util.CombinationUtil.combinations;
+
 import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
-import util.ArrayUtil;
-import util.Combination;
+import enums.Faction;
+import enums.Religion;
+
 
 public class Optimiser {
 
-	public Optimiser(Faction faction, int difficulty, Province base, Optional<Building> optionalCityBuilding, Optional<Building> optionalTown1Building, Optional<Building> optionalTown2Building) {
-		City city = base.getCity();
-		Town town1 = base.getTown1();
-		Town town2 = base.getTown2();
+	public Optimiser(Faction faction, Religion religion, int difficulty, Province base) {
+		Settlement city = base.getCity();
+		Settlement town1 = base.getTown1();
+		Settlement town2 = base.getTown2();
 		
-		List<Building[]> unusedCityCombos = Combination.combinations(ArrayUtil.concat(city.isCapital() ? faction.getCapitalCityBuildings() : faction.getCityBuildings(), optionalCityBuilding), city.unused());
+		List<Building[]> unusedCityCombos = combinations(concat(faction.buildingOptions(city), concat(religion.getCityBuildings(), city.getResource().getBuildings(), Building.class), Building.class), city.unused());
 		System.out.println("working: unused city combos: " + unusedCityCombos.size());
-		List<Building[]> unusedTown1Combos = Combination.combinations(ArrayUtil.concat(town1.isCapital() ? faction.getCapitalTownBuildings() : faction.getTownBuildings(), optionalTown1Building), town1.unused());
+		List<Building[]> unusedTown1Combos = combinations(concat(faction.buildingOptions(town1), concat(religion.getTownBuildings(), town1.getResource().getBuildings(), Building.class), Building.class), town1.unused());
 		System.out.println("working: unused town 1 combos: " + unusedTown1Combos.size());
-		List<Building[]> unusedTown2Combos = Combination.combinations(ArrayUtil.concat(town2.isCapital() ? faction.getCapitalTownBuildings() : faction.getTownBuildings(), optionalTown2Building), town2.unused());
+		List<Building[]> unusedTown2Combos = combinations(concat(faction.buildingOptions(town2), concat(religion.getTownBuildings(), town2.getResource().getBuildings(), Building.class), Building.class), town2.unused());
 		System.out.println("working: unused town 2 combos: " + unusedTown2Combos.size());
 		
 		Province maxWealthProvince = null;

@@ -1,6 +1,6 @@
 package domain;
 
-import static util.ArrayUtil.concat;
+import static com.google.common.collect.ObjectArrays.concat;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -11,12 +11,12 @@ public class Province {
 
 	private String name;
 	private int fertility;
-	private City city;
-	private Town town1;
-	private Town town2;
+	private Settlement city;
+	private Settlement town1;
+	private Settlement town2;
 	
 	public Building[] allBuildings() {
-		return concat(city.getBuildings(), concat(town1.getBuildings(), town2.getBuildings()));
+		return concat(city.getBuildings(), concat(town1.getBuildings(), town2.getBuildings(), Building.class), Building.class);
 	}
 	
 	@Override
@@ -27,5 +27,5 @@ public class Province {
 				+ "%s", 
 				name, fertility, city, town1, town2);
 	}
-	
+
 }

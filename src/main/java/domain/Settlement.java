@@ -1,27 +1,57 @@
 package domain;
 
+import static com.google.common.collect.ObjectArrays.concat;
+
 import java.util.Arrays;
 
-import lombok.AllArgsConstructor;
+import enums.Resource;
+import enums.SettlementType;
 import lombok.Getter;
 
 @Getter
-@AllArgsConstructor
-public abstract class Settlement {
-
-	private String name;
-	private boolean capital;
-	private Building[] buildings;
+public class Settlement {
 	
+	private SettlementType type;
+	private String name;
+	private Resource resource;
+	private Building[] buildings;
+
+	public static Settlement capitalCity(String name, Resource resource, Building... buildings) {
+		return new Settlement(SettlementType.CAPITAL_CITY, name, resource, buildings);
+	}
+
+	public static Settlement city(String name, Resource resource, Building... buildings) {
+		return new Settlement(SettlementType.CITY, name, resource, buildings);
+	}
+	
+	public static Settlement capitalTown(String name, Resource resource, Building... buildings) {
+		return new Settlement(SettlementType.CAPITAL_TOWN, name, resource, buildings);
+	}
+	
+	public static Settlement town(String name, Resource resource, Building... buildings) {
+		return new Settlement(SettlementType.TOWN, name, resource, buildings);
+	}
+	
+	private Settlement(SettlementType type, String name, Resource resource, Building... buildings) {
+		this.type = type;
+		this.name = name;
+		this.resource = resource;
+		this.buildings = buildings;
+	}
+
 	public int calculateSanitation(int sanitationAll) {
 		int squalor = Arrays.stream(buildings).mapToInt(b -> b.getSqualor()).sum();
 		int sanitation = Arrays.stream(buildings).mapToInt(b -> b.getSanitation()).sum();
 		return sanitationAll - squalor + sanitation;
 	}
 	
-	public abstract int unused();
+	public int unused() {
+		return type.getLimit() - buildings.length;
+	}
 	
-	public abstract Settlement prototype(Building[] additional);
+	public Settlement prototype(Building[] additional) {
+		return new Settlement(type, name, resource, concat(buildings, additional, Building.class));
+	}
 
 	@Override
 	public String toString() {

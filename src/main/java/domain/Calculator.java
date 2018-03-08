@@ -2,6 +2,9 @@ package domain;
 
 import static java.util.Arrays.stream;
 
+import enums.Faction;
+import enums.Resource;
+
 public class Calculator {
 
 	private Province province;

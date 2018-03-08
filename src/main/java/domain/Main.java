@@ -1,37 +1,51 @@
 package domain;
 
-import static domain.Buildings.*;
-import static domain.BarbarianBuildings.*;
-import static domain.SlavBuildings.*;
-import static domain.Venedi.*;
-
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
-
-import util.Combination;
+import static buildings.Barbarian.*;
+import static buildings.BarbarianSlavic.*;
+import static buildings.Venedians.*;
+import static domain.Settlement.*;
+import static enums.Faction.*;
+import static enums.Religion.*;
+import static enums.Resource.*;
+import static java.util.Optional.empty;
+import static java.util.Optional.of;
 
 @SuppressWarnings("unused")
 public class Main {
 
-	// difficulty
 	private static final int DIFFICULTY = 2;
 	
+	// Venedians
 	private static Province GERMANO_SARMARTIA = new Province("Germano-Sarmartia", 2,
-			new City("Palteskja", LARGE_CITY, WARLORDS_CASTLE, SMITHS_GUILD, TEMPLE_OF_THE_SIMMERING_WOLVES),
-			new Town("Duna", FORTIFIED_TOWN, MILITARY_PORT),
-			new Town("Ouim", FORTIFIED_TOWN)
+			capitalCity("Palteskja", NO_RESOURCE, LARGE_CITY, WARLORDS_CASTLE),
+			town("Duna", GEMSTONES, FORTIFIED_TOWN, MILITARY_PORT),
+			town("Ouim", NO_RESOURCE, FORTIFIED_TOWN)
 		);
 
+	// Sclavenians
 	private static Province HYPERBOREA = new Province("Hyperborea", 3,
-			new City("Kariskos", LARGE_CITY),
-			new Town("Duna", FORTIFIED_TOWN),
-			new Town("Ouim", FORTIFIED_TOWN)
+			capitalCity("Kariskos", FURS, LARGE_CITY),
+			town("?", NO_RESOURCE, FORTIFIED_TOWN),
+			town("?", NO_RESOURCE, FORTIFIED_TOWN)
+		);
+
+	private static Province SARMARTIA_EUROPA = new Province("Sarmartia Europa", 3,
+			city("Chersonessus", WINE, LARGE_CITY, SMOKEHOUSE),
+			town("Gelonus", NO_RESOURCE, FORTIFIED_TOWN, CANALS),
+			town("Olbia", NO_RESOURCE, FORTIFIED_TOWN, CANALS)
+		);
+	
+	// Anteans
+	private static Province TRANSCARPATHIA = new Province("Transcarpathia", 5,
+			capitalCity("Arheimer", NO_RESOURCE, LARGE_CITY, SMOKEHOUSE, CARPENTERS_GUILD),
+			town("Leopolis", DYES, FORTIFIED_TOWN, CANALS),
+			town("Belz", NO_RESOURCE, FORTIFIED_TOWN)
 		);
 
 	public static void main(String[] args) {
-		Optimiser o = new Optimiser(new Venedi(), DIFFICULTY, GERMANO_SARMARTIA, Optional.empty(), Optional.of(GEM_MARKET), Optional.empty());
-//		Optimiser o = new Optimiser(new Venedi(), DIFFICULTY, HYPERBOREA, Optional.of(FUR_MARKET), Optional.empty(), Optional.empty());
+//		Optimiser o = new Optimiser(VENEDIANS, SLAVIC_PAGANISM, DIFFICULTY, GERMANO_SARMARTIA);
+//		Optimiser o = new Optimiser(SCLAVENIANS, SLAVIC_PAGANISM, DIFFICULTY, HYPERBOREA);
+		Optimiser o = new Optimiser(ANTEANS, SLAVIC_PAGANISM, DIFFICULTY, TRANSCARPATHIA);
 	}
-	
+
 }

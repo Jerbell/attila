@@ -8,7 +8,7 @@ import domain.Building;
 import lombok.experimental.UtilityClass;
 
 @UtilityClass
-public class Combination {
+public class CombinationUtil {
 
 	public static List<Building[]> combinations(Building[] arr, int len) {
 		ArrayList<Building[]> acc = new ArrayList<>();
