@@ -22,7 +22,9 @@ public enum Resource {
 	SILK(16, SILK_ROAD_BAZAAR),
 	TIMBER(5, LUMBER_CAMP),
 	WINE(10, WINERY, FRUIT_DRYER);
-	
+
+	public static final int DYE_VALUE = 12;
+
 	private int value;
 	private Building[] buildings;
 	

@@ -15,9 +15,9 @@ import static buildings.BarbarianSlavic.ZADRUGA_COMPLEX;
 public class Venedians {
 	
 	// farms - both
-	public static final Building VENEDI_GOAT_BARNS = building().name("Venedi Goat Barns").foodFromAnimalHusbandry(70).foodPerFertility(12).wealthFromAnimalHusbandry(450).wealthFromAnimalHusbandryPerFertility(75).build();
-	public static final Building VENEDI_IRRIGATED_FIELDS = building().name("Venedi Irrigated Fields").foodFromAgriculture(40).foodPerFertility(28).wealthFromAgriculture(80).wealthFromAgriculturePerFertility(75).build();
-	public static final Building VENEDI_LIVESTOCK_PENS = building().name("Venedi Livestock Pens").foodFromAnimalHusbandry(40).foodPerFertility(10).wealthFromAnimalHusbandry(500).wealthFromAnimalHusbandryPerFertility(150).build();
+	public static final Building VENEDI_GOAT_BARNS = building().name("Venedi Goat Barns").foodFromAnimalHusbandry(70).foodPerFertility(12).wealthFromAnimalHusbandry(450).wealthFromAnimalHusbandryPerFertility(75);
+	public static final Building VENEDI_IRRIGATED_FIELDS = building().name("Venedi Irrigated Fields").foodFromAgriculture(40).foodPerFertility(28).wealthFromAgriculture(80).wealthFromAgriculturePerFertility(75);
+	public static final Building VENEDI_LIVESTOCK_PENS = building().name("Venedi Livestock Pens").foodFromAnimalHusbandry(40).foodPerFertility(10).wealthFromAnimalHusbandry(500).wealthFromAnimalHusbandryPerFertility(150);
 	
 	private static final Building[] VENEDIANS_CITY_SPECIFIC = new Building[] { VENEDI_GOAT_BARNS, VENEDI_IRRIGATED_FIELDS, VENEDI_LIVESTOCK_PENS };
 	private static final Building[] VENEDIANS_TOWN_SPECIFIC = new Building[] { VENEDI_GOAT_BARNS, VENEDI_IRRIGATED_FIELDS, VENEDI_LIVESTOCK_PENS, ZADRUGA_COMPLEX };

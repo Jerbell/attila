@@ -10,11 +10,11 @@ import lombok.experimental.UtilityClass;
 public class BarbarianSlavic {
 
 	// wonders
-	public static final Building TEMPLE_OF_THE_BLAZING_WOLVES = building().name("Temple of the Blazing Wolves").maintenance(6000).build();
-	public static final Building TEMPLE_OF_THE_SIMMERING_WOLVES = building().name("Temple of the Simmering Wolves").maintenance(6000).build();
+	public static final Building TEMPLE_OF_THE_BLAZING_WOLVES = building().name("Temple of the Blazing Wolves").maintenance(6000);
+	public static final Building TEMPLE_OF_THE_SIMMERING_WOLVES = building().name("Temple of the Simmering Wolves").maintenance(6000);
 	
 	// zadruga - town
-	public static final Building ZADRUGA_COMPLEX = building().name("Zadruga Complex").squalor(3).publicOrder(4).wealthFromCulture(750).allModifier(15).build();
+	public static final Building ZADRUGA_COMPLEX = building().name("Zadruga Complex").squalor(3).publicOrder(4).wealthFromCulture(750).allModifier(15);
 
 	private static final Building[] SLAVIC_CAPITAL_CITY = Barbarian.BARBARIAN_CAPITAL_CITY;
 	private static final Building[] SLAVIC_CITY = Barbarian.BARBARIAN_CITY;

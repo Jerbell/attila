@@ -3,7 +3,6 @@ package domain;
 import static java.util.Arrays.stream;
 
 import enums.Faction;
-import enums.Resource;
 
 public class Calculator {
 
@@ -48,20 +47,9 @@ public class Calculator {
 		int wealthFromSubsistence = stream(buildings).mapToInt(b -> b.getWealthFromSubsistence()).sum() * (100 + allModifier)/100; // TODO: check allModifier?
 		int maintenance = stream(buildings).mapToInt(b -> b.getMaintenance()).sum(); // TODO: check allModifier?
 		
-		int dyes = stream(buildings).mapToInt(b -> b.getDyes()).sum() * Resource.DYES.getValue() * (100 + tradeModifier)/100;
-		int gemstones = stream(buildings).mapToInt(b -> b.getGemstones()).sum() * Resource.GEMSTONES.getValue() * (100 + tradeModifier)/100;
-		int salt = stream(buildings).mapToInt(b -> b.getSalt()).sum() * Resource.SALT.getValue() * (100 + tradeModifier)/100;
-		int spices = stream(buildings).mapToInt(b -> b.getSpices()).sum() * Resource.SPICES.getValue() * (100 + tradeModifier)/100;
-		int iron = stream(buildings).mapToInt(b -> b.getIron()).sum() * Resource.IRON.getValue() * (100 + tradeModifier)/100;
-		int lead = stream(buildings).mapToInt(b -> b.getLead()).sum() * Resource.LEAD.getValue() * (100 + tradeModifier)/100;
-		int furs = stream(buildings).mapToInt(b -> b.getFurs()).sum() * Resource.FURS.getValue() * (100 + tradeModifier)/100;
-		int marble = stream(buildings).mapToInt(b -> b.getMarble()).sum() * Resource.MARBLE.getValue() * (100 + tradeModifier)/100;
-		int oliveOil = stream(buildings).mapToInt(b -> b.getOliveOil()).sum() * Resource.OLIVE_OIL.getValue() * (100 + tradeModifier)/100;
-		int silk = stream(buildings).mapToInt(b -> b.getSilk()).sum() * Resource.SILK.getValue() * (100 + tradeModifier)/100;
-		int timber = stream(buildings).mapToInt(b -> b.getTimber()).sum() * Resource.TIMBER.getValue() * (100 + tradeModifier)/100;
-		int wine = stream(buildings).mapToInt(b -> b.getWine()).sum() * Resource.WINE.getValue() * (100 + tradeModifier)/100;
+		int wealthFromTrade = stream(buildings).mapToInt(b -> b.getWealthFromTrade()).sum() * (100 + tradeModifier)/100;
 		
-		return wealthFromAgriculture + revisedFertility*wealthFromAgriculturePerFertility + wealthFromAnimalHusbandry + revisedFertility*wealthFromAnimalHusbandryPerFertility + wealthFromCommerce + wealthFromCulture + wealthFromIndustry + wealthFromMaritimeCommerce + wealthFromSubsistence - maintenance + dyes + gemstones + salt + spices + iron + lead + lead + furs + marble + oliveOil + silk + timber + wine;
+		return wealthFromAgriculture + revisedFertility*wealthFromAgriculturePerFertility + wealthFromAnimalHusbandry + revisedFertility*wealthFromAnimalHusbandryPerFertility + wealthFromCommerce + wealthFromCulture + wealthFromIndustry + wealthFromMaritimeCommerce + wealthFromSubsistence - maintenance + wealthFromTrade;
 	}
 	
 	public int calculateFood() {

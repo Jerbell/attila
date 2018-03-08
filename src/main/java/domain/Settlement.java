@@ -40,9 +40,7 @@ public class Settlement {
 	}
 
 	public int calculateSanitation(int sanitationAll) {
-		int squalor = Arrays.stream(buildings).mapToInt(b -> b.getSqualor()).sum();
-		int sanitation = Arrays.stream(buildings).mapToInt(b -> b.getSanitation()).sum();
-		return sanitationAll - squalor + sanitation;
+		return sanitationAll + Arrays.stream(buildings).mapToInt(b -> b.getSanitation()).sum();
 	}
 	
 	public int unused() {
