@@ -30,7 +30,7 @@ public class Barbarian {
 	// civic - town
 	public static final Building CHIEFTAINS_KEEP = building().name("Chieftain's Keep").foodConsumption(100).publicOrder(13).wealthFromCulture(825);
 	// sanitation - town
-	public static final Building CANALS = building().name("Canals").sanitation(5).sanitationAll(4);
+	public static final Building CANALS = building().name("Canals")./*fertilityModifier(1).*/sanitation(5).sanitationAll(4);
 	
 	// industries - both
 	public static final Building BONE_CRAFTERS_GUILD = building().name("Bone Crafter's Guild").squalor(8).publicOrder(-10).wealthFromIndustry(2000);
@@ -38,11 +38,6 @@ public class Barbarian {
 	public static final Building SMITHS_GUILD = building().name("Smith's Guild").squalor(6).publicOrder(-10).wealthFromIndustry(900);
 	public static final Building PLASTERMAKER = building().name("Plastermaker").squalor(6).publicOrder(-8).wealthFromIndustry(1250);
 	public static final Building BASKETWEAVERS_GUILD = building().name("Basketweaver's Guild").squalor(6).publicOrder(-8).wealthFromIndustry(1250).commerceModifier(10);
-	
-	// ports - both
-	public static final Building TRADE_PORT = building().name("Trade Port").squalor(6).publicOrder(-6).wealthFromCommerce(1250).wealthFromMaritimeCommerce(1250);
-	public static final Building FISHING_PORT = building().name("Fishing Port").squalor(6).publicOrder(-6).foodFromFishing(90).wealthFromMaritimeCommerce(1250);
-	public static final Building MILITARY_PORT = building().name("Military Port").squalor(6);
 	
 	// farms - both
 	public static final Building LIVESTOCK_PENS = building().name("Livestock Pens").squalor(4).publicOrder(-5).foodFromAnimalHusbandry(40).foodPerFertility(10).wealthFromAnimalHusbandry(500).wealthFromAnimalHusbandryPerFertility(150);

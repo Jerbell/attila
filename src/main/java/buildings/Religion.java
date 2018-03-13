@@ -8,8 +8,17 @@ import lombok.experimental.UtilityClass;
 @UtilityClass
 public class Religion {
 
-	// slavic
+	// Germanic
+	public static final Building TEMPLE_OF_WODEN = building().name("Temple of Woden").foodConsumption(80).publicOrder(5);
+	public static final Building GERMANIC_BARROWS = building().name("Germanic Barrows").sanitationAll(3);
+	public static final Building IRMINSUL = building().name("Irminsul").foodConsumption(50).publicOrder(4);
+
+	// Slavic
 	public static final Building TEMPLE_OF_PERUN = building().name("Temple of Perun").foodConsumption(80).publicOrder(5);
 	public static final Building TEMPLE_OF_MOKOSH = building().name("Temple of Mokosh").foodConsumption(50).fertilityModifier(3).publicOrder(4);
+	
+	// Semetic
+	public static final Building ENCLOSURE_OF_ALMAQAH = building().name("Enclosure of Almaqah").foodConsumption(125).publicOrder(10).agricultureModifier(40);
+	public static final Building LARGE_STELAE_FIELD = building().name("Large Stelae Field").publicOrder(6).foodFromReserves(30);
 	
 }

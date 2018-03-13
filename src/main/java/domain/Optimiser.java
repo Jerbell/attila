@@ -1,15 +1,18 @@
 package domain;
 
+import static buildings.All.isPort;
 import static com.google.common.collect.ObjectArrays.concat;
+import static java.util.Arrays.stream;
 import static util.CombinationUtil.combinations;
 import static util.DuplicateUtil.removeDuplicates;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import buildings.All;
 import enums.Faction;
 import enums.Religion;
-
 
 public class Optimiser {
 
@@ -18,11 +21,11 @@ public class Optimiser {
 		Settlement town1 = base.getTown1();
 		Settlement town2 = base.getTown2();
 		
-		List<Building[]> unusedCityCombos = combinations(removeDuplicates(city.getBuildings(), concat(faction.buildingOptions(city), concat(religion.getCityBuildings(), city.getResource().getBuildings(), Building.class), Building.class)), city.unused());
+		List<Building[]> unusedCityCombos = getCombinations(faction, religion, city);
 		System.out.println("working: unused city combos: " + unusedCityCombos.size());
-		List<Building[]> unusedTown1Combos = combinations(removeDuplicates(town1.getBuildings(), concat(faction.buildingOptions(town1), concat(religion.getTownBuildings(), town1.getResource().getBuildings(), Building.class), Building.class)), town1.unused());
+		List<Building[]> unusedTown1Combos = getCombinations(faction, religion, town1);
 		System.out.println("working: unused town 1 combos: " + unusedTown1Combos.size());
-		List<Building[]> unusedTown2Combos = combinations(removeDuplicates(town1.getBuildings(), concat(faction.buildingOptions(town2), concat(religion.getTownBuildings(), town2.getResource().getBuildings(), Building.class), Building.class)), town2.unused());
+		List<Building[]> unusedTown2Combos = getCombinations(faction, religion, town2);
 		System.out.println("working: unused town 2 combos: " + unusedTown2Combos.size());
 		
 		Province maxWealthProvince = null;
@@ -51,7 +54,7 @@ public class Optimiser {
 					int town2Sanitation = c.calculateTown2Sanitation();
 					if (food >= 0 && c.calculatePublicOrder() >= 0 && citySanitation >= 0 && town1Sanitation >= 0 && town2Sanitation >= 0) {
 						int income = c.calculateIncome();
-						int combo = income + 15*food - 10*citySanitation - 10*town1Sanitation - 10*town2Sanitation;
+						int combo = income + 125*food/9;
 						if (income > maxWealth) {
 							maxWealthProvince = p;
 							maxWealthCalculator = c;
@@ -69,8 +72,7 @@ public class Optimiser {
 						}
 					}
 					if (++count%1_000_000 == 0) { 
-						long currentTime = System.currentTimeMillis();
-						long timeGap = currentTime - startTime;
+						long timeGap = System.currentTimeMillis() - startTime;
 						long percentage = count * 100L / combosToTry;
 						if (percentage > 0) {
 							Date completeEstimate = new Date(timeGap * 100 / percentage + startTime);
@@ -81,15 +83,32 @@ public class Optimiser {
 			}
 		}
 		
+		System.out.println(String.format("%d combinations too %d seconds", combosToTry, (System.currentTimeMillis() - startTime) / 1000));
+		
 		System.out.println();
 		System.out.println("Current: \n" + base);
 		System.out.println();
-		System.out.println("Maximum wealth: \n" + maxWealthProvince + "\n" + maxWealthCalculator);
+		System.out.println("Maximum wealth " + maxWealthProvince + "\n" + maxWealthCalculator);
 		System.out.println();
-		System.out.println("Maximum food: \n" + maxFoodProvince + "\n" + maxFoodCalculator);
+		System.out.println("Maximum food " + maxFoodProvince + "\n" + maxFoodCalculator);
 		System.out.println();
-		System.out.println("Best combo: \n" + maxComboProvince + "\n" + maxComboCalculator);
+		System.out.println("Best combo " + maxComboProvince + "\n" + maxComboCalculator);
 		System.out.println();
+	}
+
+	private List<Building[]> getCombinations(Faction faction, Religion religion, Settlement settlement) {
+		if (settlement.getType().isCoastal() && !stream(settlement.getBuildings()).anyMatch(b -> isPort(b))) {
+			List<Building[]> combosWithoutPort = combinations(removeDuplicates(settlement.getBuildings(), concat(faction.buildingOptions(settlement), concat(religion.buildingOptions(settlement), settlement.getResource().getBuildings(), Building.class), Building.class)), settlement.unused() - 1);
+			List<Building[]> combosWithPort = new ArrayList<>();
+			for (Building port : All.PORTS) {
+				for (Building[] buildCombo : combosWithoutPort) {
+					combosWithPort.add(concat(port, buildCombo));
+				}
+			}
+			return combosWithPort;
+		} else {
+			return combinations(removeDuplicates(settlement.getBuildings(), concat(faction.buildingOptions(settlement), concat(religion.buildingOptions(settlement), settlement.getResource().getBuildings(), Building.class), Building.class)), settlement.unused());
+		}
 	}
 	
 }

@@ -16,6 +16,22 @@ public class Settlement {
 	private Resource resource;
 	private Building[] buildings;
 
+	public static Settlement coastalCapitalCity(String name, Resource resource, Building... buildings) {
+		return new Settlement(SettlementType.COASTAL_CAPITAL_CITY, name, resource, buildings);
+	}
+
+	public static Settlement coastalCity(String name, Resource resource, Building... buildings) {
+		return new Settlement(SettlementType.COASTAL_CITY, name, resource, buildings);
+	}
+	
+	public static Settlement coastalCapitalTown(String name, Resource resource, Building... buildings) {
+		return new Settlement(SettlementType.COASTAL_CAPITAL_TOWN, name, resource, buildings);
+	}
+	
+	public static Settlement coastalTown(String name, Resource resource, Building... buildings) {
+		return new Settlement(SettlementType.COASTAL_TOWN, name, resource, buildings);
+	}
+	
 	public static Settlement capitalCity(String name, Resource resource, Building... buildings) {
 		return new Settlement(SettlementType.CAPITAL_CITY, name, resource, buildings);
 	}
@@ -39,8 +55,8 @@ public class Settlement {
 		this.buildings = buildings;
 	}
 
-	public int calculateSanitation(int sanitationAll) {
-		return sanitationAll + Arrays.stream(buildings).mapToInt(b -> b.getSanitation()).sum();
+	public int calculateSanitation() {
+		return Arrays.stream(buildings).mapToInt(b -> b.getSanitation()).sum();
 	}
 	
 	public int unused() {

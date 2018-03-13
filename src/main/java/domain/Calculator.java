@@ -24,7 +24,7 @@ public class Calculator {
 		this.buildings = province.allBuildings();
 		this.difficulty = difficulty;
 		this.faction = faction;
-		this.revisedFertility = Math.min(province.getFertility() + stream(buildings).mapToInt(b -> b.getFertilityModifier()).sum(), 5);
+		this.revisedFertility = faction.getFertilityModifier() + province.getFertility() + stream(buildings).mapToInt(b -> b.getFertilityModifier()).sum();
 		this.sanitationAll = stream(buildings).mapToInt(b -> b.getSanitationAll()).sum();
 	}
 
@@ -68,15 +68,15 @@ public class Calculator {
 	}
 
 	public int calculateCitySanitation() {
-		return province.getCity().calculateSanitation(sanitationAll);
+		return province.getCity().calculateSanitation() + sanitationAll + faction.getSanitationModifier();
 	}
 	
 	public int calculateTown1Sanitation() {
-		return province.getTown1().calculateSanitation(sanitationAll);
+		return province.getTown1().calculateSanitation() + sanitationAll + faction.getSanitationModifier();
 	}
 	
 	public int calculateTown2Sanitation() {
-		return province.getTown2().calculateSanitation(sanitationAll);
+		return province.getTown2().calculateSanitation() + sanitationAll + faction.getSanitationModifier();
 	}
 	
 	@Override
@@ -92,11 +92,11 @@ public class Calculator {
 				revisedFertility,
 				calculatePublicOrder(),
 				province.getCity().getName(),
-				province.getCity().calculateSanitation(sanitationAll),
+				calculateCitySanitation(),
 				province.getTown1().getName(),
-				province.getTown1().calculateSanitation(sanitationAll),
+				calculateTown1Sanitation(),
 				province.getTown2().getName(),
-				province.getTown2().calculateSanitation(sanitationAll)
+				calculateTown2Sanitation()
 			);
 	}
 	
