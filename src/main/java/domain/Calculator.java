@@ -6,25 +6,25 @@ import enums.Faction;
 
 public class Calculator {
 
+	private static final int TAXES = 4;
+	private static final int DIFFICULTY = 2;
+	private static final int IMMIGRANTS = 1;
+	private static final int POLITICAL_SITUATION = 1;
+	private static final int ORDER_PENALTIES = TAXES + DIFFICULTY + IMMIGRANTS + POLITICAL_SITUATION;
+	
 	private Province province;
 	private Building[] buildings;
-	// public order
-	private int difficulty;
-	private int taxes = 4;
-	private int immigrants = 1;
-	private int politicalSituation = 1;
 	
 	private int revisedFertility;
 	private int sanitationAll;
 	
 	private Faction faction;
 	
-	public Calculator(Faction faction, int difficulty, Province province) {
+	public Calculator(Faction faction, Province province) {
 		this.province = province;
 		this.buildings = province.allBuildings();
-		this.difficulty = difficulty;
 		this.faction = faction;
-		this.revisedFertility = faction.getFertilityModifier() + province.getFertility() + stream(buildings).mapToInt(b -> b.getFertilityModifier()).sum();
+		this.revisedFertility = Math.min(5, faction.getFertilityModifier() + province.getFertility() + stream(buildings).mapToInt(b -> b.getFertilityModifier()).sum());
 		this.sanitationAll = stream(buildings).mapToInt(b -> b.getSanitationAll()).sum();
 	}
 
@@ -64,7 +64,7 @@ public class Calculator {
 	}
 	
 	public int calculatePublicOrder() {
-		return stream(buildings).mapToInt(b -> b.getPublicOrder()).sum() - difficulty - taxes - immigrants - politicalSituation;
+		return stream(buildings).mapToInt(b -> b.getPublicOrder()).sum() - ORDER_PENALTIES;
 	}
 
 	public int calculateCitySanitation() {
@@ -81,22 +81,20 @@ public class Calculator {
 	
 	@Override
 	public String toString() {
-		return String.format("Income: %d\n"
-				+ "Food: %d (revised fertility: %d)\n"
+		return String.format("%s (fertility: %d)\n"
+				+ "%s, sanitation: %d\n"
+				+ "%s, sanitation: %d\n"
+				+ "%s, sanitation: %d\n" 
 				+ "Public Order: %d\n"
-				+ "Sanitation - %s: %d\n"
-				+ "Sanitation - %s: %d\n"
-				+ "Sanitation - %s: %d", 
-				calculateIncome(), 
-				calculateFood(),
-				revisedFertility,
+				+ "Income: %d\n"
+				+ "Food: %d (revised fertility: %d)",
+				province.getName(), province.getFertility(),
+				province.getCity(), calculateCitySanitation(),
+				province.getTown1(), calculateTown1Sanitation(),
+				province.getTown2(), calculateTown2Sanitation(),
 				calculatePublicOrder(),
-				province.getCity().getName(),
-				calculateCitySanitation(),
-				province.getTown1().getName(),
-				calculateTown1Sanitation(),
-				province.getTown2().getName(),
-				calculateTown2Sanitation()
+				calculateIncome(), 
+				calculateFood(), revisedFertility
 			);
 	}
 	

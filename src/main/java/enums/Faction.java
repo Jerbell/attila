@@ -3,6 +3,7 @@ package enums;
 import static buildings.BarbarianNorse.*;
 import static buildings.BarbarianSlavic.*;
 import static buildings.Desert.*;
+import static buildings.Himyar.*;
 import static buildings.Venedians.*;
 
 import domain.Building;
@@ -24,7 +25,7 @@ public enum Faction {
 	FRANKS(0, 0, 0, 0, 0, 0, new Building[] {}, new Building[] {}, new Building[] {}, new Building[] {}),
 	GARAMANTIANS(2, 1, 0, 0, 0, 0, DESERT_CAPITAL_CITY, DESERT_CITY, DESERT_CAPITAL_TOWN, DESERT_TOWN),
 	GEATS(0, 0, 0, 0, 0, 0, NORDIC_CAPITAL_CITY, NORDIC_CITY, NORDIC_CAPITAL_TOWN, NORDIC_TOWN),
-	HIMYAR(0, 0, 0, 0, 0, 0, new Building[] {}, new Building[] {}, new Building[] {}, new Building[] {}),
+	HIMYAR(2, 0, 0, 0, 0, 0, HIMYAR_CAPITAL_CITY, DESERT_CITY, DESERT_CAPITAL_TOWN, DESERT_TOWN),
 	HUNS(0, 0, 0, 0, 0, 0, new Building[] {}, new Building[] {}, new Building[] {}, new Building[] {}),
 	JUTES(0, 0, 0, 0, 0, 0, NORDIC_CAPITAL_CITY, NORDIC_CITY, NORDIC_CAPITAL_TOWN, NORDIC_TOWN),
 	LAKHMIDS(0, 0, 0, 0, 0, 0, new Building[] {}, new Building[] {}, new Building[] {}, new Building[] {}),

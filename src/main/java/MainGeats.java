@@ -67,9 +67,9 @@ public class MainGeats {
 		);
 
 	public static void main(String[] args) {
-//		Optimiser o = new Optimiser(GEATS, GERMAN_PAGANISM, DIFFICULTY, SCANDZA);
-//		Optimiser o = new Optimiser(GEATS, GERMAN_PAGANISM, DIFFICULTY, GERMANO_SARMARTIA);
-		Optimiser o = new Optimiser(GEATS, GERMAN_PAGANISM, DIFFICULTY, BRITANNIA_INFERIOR);
+//		Optimiser o = new Optimiser(GEATS, GERMAN_PAGANISM, SCANDZA);
+//		Optimiser o = new Optimiser(GEATS, GERMAN_PAGANISM, GERMANO_SARMARTIA);
+		Optimiser o = new Optimiser(GEATS, GERMAN_PAGANISM, BRITANNIA_INFERIOR);
 	}
 
 }

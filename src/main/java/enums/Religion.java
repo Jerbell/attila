@@ -11,7 +11,7 @@ public enum Religion {
 	EASTERN_CHRISTIANITY(new Building[] {}, new Building[] {}),
 	GREEK_CHRISTIANITY(new Building[] {}, new Building[] {}),
 	LATIN_CHRISTIANITY(new Building[] {}, new Building[] {}),
-	JUDAISM(new Building[] {}, new Building[] {}),
+	JUDAISM(new Building[] { HIMYARITE_SYNAGOGUE_OF_THE_CHOSEN }, new Building[] { HIMYARITE_MONUMENTAL_MIKVE }),
 	MANICHAEISM(new Building[] {}, new Building[] {}),
 	ZOROASTRIANISM(new Building[] {}, new Building[] {}),
 	GERMAN_PAGANISM(new Building[] { TEMPLE_OF_WODEN }, new Building[] { GERMANIC_BARROWS, IRMINSUL }),

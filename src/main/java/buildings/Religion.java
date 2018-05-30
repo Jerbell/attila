@@ -13,6 +13,10 @@ public class Religion {
 	public static final Building GERMANIC_BARROWS = building().name("Germanic Barrows").sanitationAll(3);
 	public static final Building IRMINSUL = building().name("Irminsul").foodConsumption(50).publicOrder(4);
 
+	// Judaism
+	public static final Building HIMYARITE_SYNAGOGUE_OF_THE_CHOSEN = building().name("Himyarite Synagogue of the Chosen").foodConsumption(125).publicOrder(10);
+	public static final Building HIMYARITE_MONUMENTAL_MIKVE = building().name("Himyarite Monumental Mikve").foodConsumption(50).sanitationAll(6).publicOrder(6);
+	
 	// Slavic
 	public static final Building TEMPLE_OF_PERUN = building().name("Temple of Perun").foodConsumption(80).publicOrder(5);
 	public static final Building TEMPLE_OF_MOKOSH = building().name("Temple of Mokosh").foodConsumption(50).fertilityModifier(3).publicOrder(4);

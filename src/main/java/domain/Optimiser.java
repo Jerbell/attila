@@ -16,7 +16,7 @@ import enums.Religion;
 
 public class Optimiser {
 
-	public Optimiser(Faction faction, Religion religion, int difficulty, Province base) {
+	public Optimiser(Faction faction, Religion religion, Province base) {
 		Settlement city = base.getCity();
 		Settlement town1 = base.getTown1();
 		Settlement town2 = base.getTown2();
@@ -28,15 +28,12 @@ public class Optimiser {
 		List<Building[]> unusedTown2Combos = getCombinations(faction, religion, town2);
 		System.out.println("working: unused town 2 combos: " + unusedTown2Combos.size());
 		
-		Province maxWealthProvince = null;
 		Calculator maxWealthCalculator = null;
 		int maxWealth = Integer.MIN_VALUE;
 		
-		Province maxFoodProvince = null;
 		Calculator maxFoodCalculator = null;
 		int maxFood = Integer.MIN_VALUE;
 		
-		Province maxComboProvince = null;
 		Calculator maxComboCalculator = null;
 		int maxCombo = Integer.MIN_VALUE;
 		
@@ -47,7 +44,7 @@ public class Optimiser {
 			for (Building[] town1Combo : unusedTown1Combos) {
 				for (Building[] town2Combo : unusedTown2Combos) {
 					Province p = new Province(base.getName(), base.getFertility(), city.prototype(cityCombo), town1.prototype(town1Combo), town2.prototype(town2Combo));
-					Calculator c = new Calculator(faction, difficulty, p);
+					Calculator c = new Calculator(faction, p);
 					int food = c.calculateFood();
 					int citySanitation = c.calculateCitySanitation();
 					int town1Sanitation = c.calculateTown1Sanitation();
@@ -56,17 +53,14 @@ public class Optimiser {
 						int income = c.calculateIncome();
 						int combo = income + 125*food/9;
 						if (income > maxWealth) {
-							maxWealthProvince = p;
 							maxWealthCalculator = c;
 							maxWealth = income;
 						}
 						if (food > maxFood) {
-							maxFoodProvince = p;
 							maxFoodCalculator = c;
 							maxFood = food;
 						}
 						if (combo > maxCombo) {
-							maxComboProvince = p;
 							maxComboCalculator = c;
 							maxCombo = combo;
 						}
@@ -86,13 +80,11 @@ public class Optimiser {
 		System.out.println(String.format("%d combinations too %d seconds", combosToTry, (System.currentTimeMillis() - startTime) / 1000));
 		
 		System.out.println();
-		System.out.println("Current: \n" + base);
+		System.out.println("Maximum wealth " + maxWealthCalculator);
 		System.out.println();
-		System.out.println("Maximum wealth " + maxWealthProvince + "\n" + maxWealthCalculator);
+		System.out.println("Maximum food " + maxFoodCalculator);
 		System.out.println();
-		System.out.println("Maximum food " + maxFoodProvince + "\n" + maxFoodCalculator);
-		System.out.println();
-		System.out.println("Best combo " + maxComboProvince + "\n" + maxComboCalculator);
+		System.out.println("Best combo " + maxComboCalculator);
 		System.out.println();
 	}
 
